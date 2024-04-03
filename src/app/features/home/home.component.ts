@@ -1,7 +1,7 @@
 // src/features/home/home.component.ts
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectTotal } from '../../core/store/counter/counter.feature';
+import { selectTotal } from '../counter/store/counter.feature';
 
 @Component({
   selector: 'app-home',

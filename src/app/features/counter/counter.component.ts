@@ -2,8 +2,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CounterActions } from '../../core/store/counter/counter.actions';
-import { selectValue, selectItemsInBox, selectTotal } from '../../core/store/counter/counter.feature';
+import { CounterActions } from './store/counter.actions';
+import { selectValue, selectItemsInBox, selectTotal } from './store/counter.feature';
 
 @Component({
   selector: 'app-counter',

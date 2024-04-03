@@ -15,7 +15,13 @@ export const cartFeature = createFeature({
   name: 'cart',
   reducer: createReducer(
     initialState,
-    // UPDATE
+    // NEW
+    on(CartActions.load, (state, action) => {
+      return ({
+        ...state,
+        list: action.items
+      })
+    }),
     on(CartActions.add, (state, action) => {
       const productAlreadyInCart = state.list.find(item => item.product.id === action.item.id);
 
@@ -34,7 +40,6 @@ export const cartFeature = createFeature({
         })
       }
     }),
-    // UPDATE
     on(CartActions.remove, (state, action) => ({
       ...state,
       list: state.list.filter(item => item.product.id !== action.id)
@@ -47,7 +52,6 @@ export const cartFeature = createFeature({
           })
         })
     }),
-    // NEW
     on(CartActions.decreaseQuantity, (state, action) => {
       const productAlreadyInCart = state.list.find(item => item.product.id === action.id);
       if (productAlreadyInCart && productAlreadyInCart.qty > 1) {

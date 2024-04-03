@@ -1,7 +1,7 @@
 // features/shop.ts
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Product } from '../../../../model/product';
+import { Product } from '../../../model/product';
 import { CartActions } from '../../core/store/cart/cart.actions';
 import { ProductsActions } from './store/products/products.actions';
 import { selectList } from './store/products/products.feature';

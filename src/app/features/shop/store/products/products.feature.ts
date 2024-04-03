@@ -1,6 +1,6 @@
 // features/shop/store/products/products.feature.ts
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { Product } from '../../../../../../model/product';
+import { Product } from '../../../../../model/product';
 import { ProductsActions } from './products.actions';
 
 export interface ProductsState {

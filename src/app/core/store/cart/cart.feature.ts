@@ -1,6 +1,6 @@
 // core/store/cart/cart.feature.ts
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
-import { Product } from '../../../../../model/product';
+import { Product } from '../../../../model/product';
 import { CartActions } from './cart.actions';
 
 export interface CartState {

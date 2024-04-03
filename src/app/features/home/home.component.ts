@@ -1,7 +1,6 @@
 // src/features/home/home.component.ts
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectTotal } from '../counter/store/counter.feature';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +8,11 @@ import { selectTotal } from '../counter/store/counter.feature';
   imports: [],
   template: `
     <p>
-      home works! {{total()}}
+      home works! 
     </p>
   `,
   styles: ``
 })
 export default class HomeComponent {
   store = inject(Store)
-  total = this.store.selectSignal(selectTotal)
 }

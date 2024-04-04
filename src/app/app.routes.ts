@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { counterFeature } from './features/counter/store/counter.feature';
+import { shopFiltersFeature } from './features/shop/store/filters/shop-filters.feature';
 import { productsFeature } from './features/shop/store/products/products.feature';
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
     loadComponent: () => import('./features/shop/shop.component'),
     providers: [
       provideState({ name: productsFeature.name, reducer: productsFeature.reducer }),
+      provideState({ name: shopFiltersFeature.name, reducer: shopFiltersFeature.reducer }),
     ]
   },
   { path: 'cart', loadComponent: () => import('./features/cart/cart.component')},

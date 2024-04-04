@@ -8,7 +8,7 @@
     {
       "id": 1,
       "name": "GitHub #1",
-      "cost": 1,
+      "cost": 10,
       "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
       "type": "wood"
     },
@@ -64,7 +64,7 @@
     {
       "name": "Fabio Biondi",
       "id": 9,
-      "cost": 1,
+      "cost": 10,
       "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149829/tutorial-content/video-corsi/ngrx/image-keychains/fb.jpg",
       "type": "wood"
     },

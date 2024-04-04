@@ -7,7 +7,6 @@ import { productsFeature } from './features/shop/store/products/products.feature
 import { shopUIFeature } from './features/shop/store/ui/shop-ui.feature';
 
 export const routes: Routes = [
-  { path: 'home', loadComponent: () => import('./features/home/home.component')},
   // NEW
   {
     path: 'shop',
@@ -26,5 +25,5 @@ export const routes: Routes = [
       provideState({ name: counterFeature.name, reducer: counterFeature.reducer }),
     ]
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'shop', pathMatch: 'full' }
 ];

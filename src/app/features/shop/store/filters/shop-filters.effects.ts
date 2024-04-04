@@ -29,7 +29,7 @@ export const shopFilterUpdate = createEffect((
           if (action.filters.plastic) {
             params.append('type', 'plastic')
           }
-          console.log(params.toString())
+          // console.log(params.toString())
 
           return http.get<Product[]>(`http://localhost:3000/products?${params.toString()}`)
           .pipe(

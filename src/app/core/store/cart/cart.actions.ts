@@ -4,7 +4,7 @@ import { CartItem } from '../../../../model/cart-item';
 import { Product } from '../../../../model/product';
 
 export const CartActions = createActionGroup({
-  source: 'Cart API',
+  source: 'Cart',
   events: {
     // NEW
     'load': props<{ items: CartItem[] }>(),

@@ -9,6 +9,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { cartFeature } from './core/store/cart/cart.feature';
 import * as cartEffects from './core/store/cart/cart.effects';
+import * as productsCMSEffects from './features/cms/store/products/cms-products.effects';
 import * as shopFilterEffect from './features/shop/store/filters/shop-filters.effects';
 import * as productsEffects from './features/shop/store/products/products.effects';
 
@@ -20,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'home', reducer: () => [1, 2, 3] }),
     provideState({ name: 'cart', reducer: cartFeature.reducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([productsEffects, cartEffects, shopFilterEffect])
+    provideEffects([productsEffects, cartEffects, shopFilterEffect, productsCMSEffects])
   ]
 };

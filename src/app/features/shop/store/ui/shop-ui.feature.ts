@@ -1,5 +1,5 @@
 // features/shop/store/ui/shop-ui.feature.ts
-import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { ShopUiActions } from './shop-ui.actions';
 
 // NEW

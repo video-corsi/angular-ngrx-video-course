@@ -8,7 +8,6 @@ import { CartActions } from './cart.actions';
 import { selectList } from './cart.feature';
 
 export const loadCartFromLocalStorage = createEffect((
-    store = inject(Store),
     actions$ = inject(Actions),
   ) => {
     return actions$.pipe(

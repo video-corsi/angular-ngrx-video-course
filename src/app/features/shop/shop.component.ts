@@ -1,5 +1,5 @@
 // features/shop/shop.ts
-import { Component, inject, OnInit, Signal, signal } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../../../model/product';
 import { ShopFilters } from '../../../model/shop-filters';
@@ -13,7 +13,7 @@ import { selectIsFilterPanelOpened } from './store/ui/shop-ui.feature';
 @Component({
   selector: 'app-shop',
   standalone: true,
-  template: `
+  template: ` 
     <!--NEW-->
     <app-shop-filters 
       [filters]="filters()"

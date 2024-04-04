@@ -39,7 +39,7 @@ export const shopFilterUpdate = createEffect((
                 filters: action.filters
               })
             ),
-            catchError((error) =>
+            catchError(() =>
               of(ShopFiltersActions.updateFail())
             )
           )

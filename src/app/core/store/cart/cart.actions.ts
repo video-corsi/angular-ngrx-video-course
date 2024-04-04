@@ -1,5 +1,5 @@
 // core/store/cart/cart.actions.ts
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
 import { CartItem } from '../../../../model/cart-item';
 import { Product } from '../../../../model/product';
 

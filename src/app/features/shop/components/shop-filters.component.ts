@@ -1,25 +1,32 @@
 // features/shop/components/shop-filters.ts
 
-import { JsonPipe } from '@angular/common';
-import { Component, inject, OnInit, output } from '@angular/core';
+import { JsonPipe, NgClass } from '@angular/common';
+import { Component, effect, inject, input, OnInit, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { Material } from '../../../../model/product';
 import { ShopFilters } from '../../../../model/shop-filters';
 
 @Component({
   selector: 'app-shop-filters',
   standalone: true,
   imports: [
-    JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
   template: `
     <div
-      class="fixed w-96 top-0 right-0 h-full bg-slate-700 z-10 shadow-lg"
+      class="fixed w-96 top-0 right-0 h-full bg-slate-700 z-10 shadow-lg transition-all ease-in-out"
+      [ngClass]="{
+        'right-0': isOpen(),
+        '-right-96': !isOpen(),
+      }"
     >
       <form class="flex flex-col gap-4 m-6" [formGroup]="form">
-        <h1 class="text-2xl font-bold">FILTERS</h1>
+        <!--NEW-->
+        <div class="flex justify-between">
+          <h1 class="text-2xl font-bold">FILTERS</h1>
+          <button (click)="close.emit()">X</button>
+        </div>
 
         <!--SEARCH TEXT-->
         <input 
@@ -68,9 +75,6 @@ import { ShopFilters } from '../../../../model/shop-filters';
           </label>
         </div>
       </form>
-
-      <pre>{{ form.value | json }}</pre>
-
     </div>
 
   `,
@@ -78,7 +82,11 @@ import { ShopFilters } from '../../../../model/shop-filters';
 })
 export class ShopFiltersComponent  {
   fb = inject(FormBuilder)
+  filters = input.required<ShopFilters>()
+  isOpen = input(false)
   changeFilters = output<Partial<ShopFilters>>()
+  // NEW
+  close = output()
 
   form = this.fb.nonNullable.group({
     text: '',
@@ -88,8 +96,14 @@ export class ShopFiltersComponent  {
     paper: false
   })
 
-  // NEW
   constructor() {
+    effect(() => {
+      const filters = this.filters();
+      if (filters) {
+        this.form.patchValue(filters, { emitEvent: false });
+        }
+    });
+
     this.form.valueChanges
       .pipe(
         debounceTime(1000)

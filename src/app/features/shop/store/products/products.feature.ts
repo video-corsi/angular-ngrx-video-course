@@ -1,6 +1,7 @@
 // features/shop/store/products/products.feature.ts
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Product } from '../../../../../model/product';
+import { ShopFiltersActions } from '../filters/shop-filters.actions';
 import { ProductsActions } from './products.actions';
 
 export interface ProductsState {
@@ -18,6 +19,10 @@ export const productsFeature = createFeature({
   name: 'products',
   reducer: createReducer(
     initialState,
+    // NEW
+    on(ShopFiltersActions.updateSuccess, (state, action) => ({
+      ...state, list: action.items
+    })),
     on(ProductsActions.load, (state) => ({
       ...state, pending: true, hasError: false
     })),

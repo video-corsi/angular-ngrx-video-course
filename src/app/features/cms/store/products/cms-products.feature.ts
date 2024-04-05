@@ -27,7 +27,7 @@ export const cmsProductsFeature = createFeature({
     // NEW
     on(CmsProductsActions.openModalAdd, (state) => ({ ...state, isPanelOpened: true })),
     on(CmsProductsActions.openModalEdit, (state, action) => ({ ...state, isPanelOpened: true, active: action.item })),
-    on(CmsProductsActions.closeModal, (state, action) => ({ ...state, isPanelOpened: false })),
+    on(CmsProductsActions.closeModal, (state, action) => ({ ...state, isPanelOpened: false, active: null })),
 
     on(CmsProductsActions.load, (state) => ({ ...state, hasError: false, pending: true })),
     on(CmsProductsActions.loadSuccess, (state, action) => ({
@@ -79,7 +79,8 @@ export const cmsProductsFeature = createFeature({
       }),
       hasError: false,
       pending: false,
-      isPanelOpened: false
+      isPanelOpened: false,
+      active: null
     })),
     on(CmsProductsActions.editProductFail, (state) => ({
       ...state,

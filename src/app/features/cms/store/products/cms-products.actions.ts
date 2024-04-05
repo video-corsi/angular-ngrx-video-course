@@ -11,6 +11,8 @@ export const CmsProductsActions = createActionGroup({
     'Load': emptyProps(),
     'Load Success': props<{ items: Product[] }>(),
     'Load Fail': emptyProps(),
+    // NEW
+    'Save': props<{ item: Partial<Product> }>(),
     'Add Product': props<{ item: Partial<Product> }>(),
     'Add Product Success':  props<{ item: Product }>(),
     'Add Product Fail': emptyProps(),

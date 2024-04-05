@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Product } from '../../../model/product';
 import { ShopFilters } from '../../../model/shop-filters';
 import { CartActions } from '../../core/store/cart/cart.actions';
+import { RouterActions } from '../../core/store/router/router.actions';
 import { ShopFiltersComponent } from './components/shop-filters.component';
 import { ShopFiltersActions } from './store/filters/shop-filters.actions';
 import { selectFilteredList, selectShopFiltersState } from './store/filters/shop-filters.feature';

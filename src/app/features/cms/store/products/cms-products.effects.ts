@@ -2,10 +2,12 @@
 
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Product } from '../../../../../model/product';
 import { CmsProductsActions } from './cms-products.actions';
+import { selectActive } from './cms-products.feature';
 
 export const loadProducts = createEffect((
     actions$ = inject(Actions),
@@ -49,6 +51,27 @@ export const deleteProduct = createEffect((
     );
   },
   { functional: true}
+);
+
+export const saveProduct = createEffect((
+    actions$ = inject(Actions),
+    store = inject(Store)
+  ) => {
+    return actions$.pipe(
+      ofType(CmsProductsActions.save),
+      concatLatestFrom(() => store.select(selectActive)),
+      map(([action, active]) => {
+        if (active?.id) {
+          // edit
+          const editedProduct = { ...action.item, id: active.id }
+          return CmsProductsActions.editProduct({ item: editedProduct })
+        }
+        //add
+        return CmsProductsActions.addProduct({ item: action.item })
+      })
+    );
+  },
+  { functional: true }
 );
 
 export const addProduct = createEffect((

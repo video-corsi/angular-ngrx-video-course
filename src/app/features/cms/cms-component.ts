@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Product } from '../../../model/product';
 import { CmsProductsActions } from './store/products/cms-products.actions';
-import { addProduct, editProduct } from './store/products/cms-products.effects';
+
 import {
   selectActive,
   selectHasError,
@@ -47,7 +47,6 @@ import {
         <h3 class="font-bold text-2lg">
           ADD / EDIT item
         </h3>
-        <!--NEW-->
         <form class="flex flex-col gap-3" [formGroup]="form">
           <input 
             type="text" placeholder="Product name" class="input input-bordered w-full max-w-xs"
@@ -99,17 +98,13 @@ import {
 })
 export default class CmsComponent implements OnInit {
   store = inject(Store)
-  // NEW
   fb = inject(FormBuilder)
   error = this.store.selectSignal(selectHasError);
   pending = this.store.selectSignal(selectPending);
   products = this.store.selectSignal(selectList);
-  // NEW
   isModalOpened = this.store.selectSignal(selectIsPanelOpened);
-  // NEW
   active = this.store.selectSignal(selectActive);
 
-  // NEW
   form = this.fb.nonNullable.group({
     name: ''
   })
@@ -124,27 +119,9 @@ export default class CmsComponent implements OnInit {
 
   // NEW
   saveProduct() {
-    if (this.active()) {
-      this.editProduct()
-    } else {
-      addProduct()
-    }
+    this.store.dispatch(CmsProductsActions.save({ item: this.form.value}))
   }
 
-  addProduct() {
-    this.store.dispatch(CmsProductsActions.addProduct({ item: this.form.value}))
-  }
-
-  // NEW
-  editProduct() {
-    const editedProduct = {
-      ...this.form.value,
-      id: this.active()?.id
-    }
-    this.store.dispatch(CmsProductsActions.editProduct({ item: editedProduct }))
-  }
-
-  // NEW
   openModalToEditProduct(product: Product) {
     this.store.dispatch(CmsProductsActions.openModalEdit({ item: product}))
     this.form.patchValue(product)

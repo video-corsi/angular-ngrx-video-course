@@ -1,6 +1,7 @@
 // app.routes.ts
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
+import { authGuard } from './core/auth/auth.guard';
 import { cmsProductsFeature } from './features/cms/store/products/cms-products.feature';
 import { counterFeature } from './features/counter/store/counter.feature';
 import { shopFiltersFeature } from './features/shop/store/filters/shop-filters.feature';
@@ -17,10 +18,13 @@ export const routes: Routes = [
       provideState({ name: shopUIFeature.name, reducer: shopUIFeature.reducer }),
     ]
   },
+  { path: 'login', loadComponent: () => import('./features/login/login.component')},
   { path: 'cart', loadComponent: () => import('./features/cart/cart.component')},
   // NEW
   {
-    path: 'cms', loadComponent: () => import('./features/cms/cms-component'),
+    path: 'cms',
+    loadComponent: () => import('./features/cms/cms-component'),
+    canActivate: [authGuard],
     providers: [
       provideState({ name: cmsProductsFeature.name, reducer: cmsProductsFeature.reducer }),
     ]

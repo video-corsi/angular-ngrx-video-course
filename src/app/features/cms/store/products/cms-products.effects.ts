@@ -42,7 +42,7 @@ export const deleteProduct = createEffect((
               CmsProductsActions.deleteProductSuccess({ id: action.id })
             ),
             catchError(() =>
-              of(CmsProductsActions.loadFail())
+              of(CmsProductsActions.deleteProductFail())
             )
           )
       )
@@ -64,7 +64,30 @@ export const addProduct = createEffect((
               CmsProductsActions.addProductSuccess({ item })
             ),
             catchError(() =>
-              of(CmsProductsActions.loadFail())
+              of(CmsProductsActions.addProductFail())
+            )
+          )
+      )
+    );
+  },
+  { functional: true}
+);
+
+// NEW
+export const editProduct = createEffect((
+    actions$ = inject(Actions),
+    http = inject(HttpClient)
+  ) => {
+    return actions$.pipe(
+      ofType(CmsProductsActions.editProduct),
+      mergeMap((action) =>
+        http.patch<Product>(`http://localhost:3000/products/${action.item.id}`, action.item)
+          .pipe(
+            map((item) =>
+              CmsProductsActions.editProductSuccess({ item })
+            ),
+            catchError(() =>
+              of(CmsProductsActions.editProductFail())
             )
           )
       )

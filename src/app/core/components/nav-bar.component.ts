@@ -2,6 +2,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { IfLoggedDirective } from '../auth/if-logged.directive';
 import { AuthActions } from '../store/auth/auth.actions';
 import { selectDisplayName } from '../store/auth/auth.feature';
 import { selectIsCartEmpty, selectTotalCartCost, selectTotalCartItems } from '../store/cart/cart.feature';
@@ -10,7 +11,8 @@ import { selectIsCartEmpty, selectTotalCartCost, selectTotalCartItems } from '..
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    IfLoggedDirective
   ],
   template: `
     <div class="navbar bg-base-100 sticky top-0 z-10">
@@ -50,10 +52,9 @@ import { selectIsCartEmpty, selectTotalCartCost, selectTotalCartItems } from '..
           </div>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <div class="font-bold text-pink-400">{{ displayName()}}</div>
-            <li routerLink="cms"><a>CMS</a></li>
-            <li routerLink="login"><a>LOGIN</a></li>
-            <!--NEW-->
-            <li (click)="logout()"><a>LOGOUT</a></li>
+            <li routerLink="cms" *appIfLogged><a>CMS</a></li>
+            <li (click)="logout()" *appIfLogged><a>LOGOUT</a></li>
+            <li routerLink="login" *appIfLogged="true"><a>LOGIN</a></li>
           </ul>
         </div>
       </div>
@@ -69,7 +70,6 @@ export class NavBarComponent {
   totalCost = this.store.selectSignal(selectTotalCartCost)
   isEmpty = this.store.selectSignal(selectIsCartEmpty)
 
-  // NEW
   logout() {
     this.store.dispatch(AuthActions.logout())
   }
